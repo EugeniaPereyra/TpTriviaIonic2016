@@ -1,1 +1,25 @@
 /* Empty. Add your own CSS if you like */
+
+.signup-background {
+    background-color: black;
+}
+
+.signup-background-login {
+    background: url('../img/1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+h2{
+	color:#40FF00;
+}
+
+h3{
+	color:#40FF00;
+}
+
+p{
+	color:#40FF00;
+}

@@ -75,7 +75,7 @@ angular.module('starter.controllers', [])
 
   	var usuarios=new Firebase('https://trivia-ce4e1.firebaseio.com/usuarios');
   	$scope.Salir=function(){
-  		usuario.push({usuario:$scope.usuario.nombre, 
+  		usuarios.push({usuario:$scope.usuario.nombre, 
   						pregunta1:$scope.usuario.pregunta1,
   						pregunta2:$scope.usuario.pregunta2,
   						pregunta3:$scope.usuario.pregunta3,
