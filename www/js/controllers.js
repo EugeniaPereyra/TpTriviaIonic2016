@@ -36,11 +36,13 @@ angular.module('starter.controllers', [])
 	  			alert("Correcto!!");
 	  			$scope.usuario.pregunta1="bien";
 	  			$scope.usuario.puntaje+=pregunta.puntos;
+	  			$scope.usuario.correcto=true;
 	  		}
 	  		else
 	  		{
 	  			alert("incorrecto");
 	  			$scope.usuario.pregunta1="mal";
+	  			$scope.usuario.correcto=false;
 	  		}
   		}
   		if(pregunta.id==2)

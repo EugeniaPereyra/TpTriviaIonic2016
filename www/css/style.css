@@ -30,3 +30,16 @@ p{
 	color:#40FF00;
 	text-align: center;
 }
+
+.btn-correcto
+{
+	background-color: green;
+	color: black;
+
+}
+
+.btn-incorrecto
+{
+	background-color: red;
+	color: white;	
+}
