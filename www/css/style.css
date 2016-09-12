@@ -12,14 +12,21 @@
     background-attachment: fixed;
 }
 
+.autor{
+	background-color: #610B4B;
+}
+
 h2{
 	color:#40FF00;
+	text-align: center;
 }
 
 h3{
 	color:#40FF00;
+	text-align: center;
 }
 
 p{
 	color:#40FF00;
+	text-align: center;
 }
