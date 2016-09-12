@@ -10,7 +10,7 @@ angular.module('starter.controllers', [])
 	}
 })
 
-.controller('TriviaCtrl', function($scope, $timeout, $stateParams) {
+.controller('TriviaCtrl', function($scope, $timeout, $stateParams, $state) {
 
 	var nombre=JSON.parse($stateParams.nombre);
   	$scope.usuario={};
@@ -80,6 +80,7 @@ angular.module('starter.controllers', [])
   						pregunta2:$scope.usuario.pregunta2,
   						pregunta3:$scope.usuario.pregunta3,
   						puntaje:$scope.usuario.puntaje });
+  		$state.go("tab.login");
   	}
 
 })
