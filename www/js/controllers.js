@@ -1,8 +1,20 @@
 angular.module('starter.controllers', [])
 
-.controller('LoginCtrl', function($scope) {})
+.controller('LoginCtrl', function($scope, $state) {
+	$scope.usuario={};
+	$scope.usuario.nombre;
 
-.controller('TriviaCtrl', function($scope) {
+	$scope.Guardar=function(usuario){
+		var dato=JSON.stringify(usuario);
+		$state.go("tab.trivia",{nombre:dato});
+	}
+})
+
+.controller('TriviaCtrl', function($scope, $stateParams) {
+
+	var nombre=JSON.parse($stateParams.nombre);
+  	$scope.usuario={};
+  	$scope.usuario.nombre=nombre.nombre;
 
 })
 

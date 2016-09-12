@@ -51,7 +51,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 
   .state('tab.trivia', {
-      url: '/trivia',
+      url: '/trivia/:nombre',
       views: {
         'tab-trivia': {
           templateUrl: 'templates/tab-trivia.html',
