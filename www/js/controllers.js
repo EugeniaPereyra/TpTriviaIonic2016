@@ -87,5 +87,9 @@ angular.module('starter.controllers', [])
 
 
 .controller('AutorCtrl', function($scope) {
-
+	$scope.autor={};
+	$scope.autor.nombre="Maria Eugenia Pereyra";
+	$scope.autor.foto="img/autor.jpg";
+	$scope.autor.email="meugeniape@gmail.com";
+	$scope.autor.github="https://github.com/EugeniaPereyra";
 });
