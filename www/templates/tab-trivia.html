@@ -1,5 +1,32 @@
 <ion-view view-title="Trivia">
   <ion-content>
-  		{{usuario.nombre}}
+  		<center><h2><strong>{{usuario.nombre}}</strong></h2></center>
+  		<div ng-repeat="pregunta in preguntas">
+  			<center><h3 ng-show="pregunta.id==1"><strong>{{pregunta.pregunta}}</strong></h3></center>
+
+  			<button class="button button-block button-positive" ng-repeat="opcion in pregunta.opciones" ng-show="pregunta.id==1" ng-click="Verificar(opcion, pregunta)">
+			  {{opcion}}
+			</button>
+
+  			<center><h3 ng-show="pregunta.id==2 && usuario.pregunta1"><strong>{{pregunta.pregunta}}</strong></h3></center>
+
+  			<button class="button button-block button-positive" ng-repeat="opcion in pregunta.opciones" ng-show="pregunta.id==2 && usuario.pregunta1" ng-click="Verificar(opcion, pregunta)">
+			  {{opcion}}
+			</button>
+
+  			<center><h3 ng-show="pregunta.id==3 && usuario.pregunta1 && usuario.pregunta2"><strong>{{pregunta.pregunta}}</strong></h3></center>
+
+  			<button class="button button-block button-positive" ng-repeat="opcion in pregunta.opciones" ng-show="pregunta.id==3 && usuario.pregunta1 && usuario.pregunta2" ng-click="Verificar(opcion, pregunta)">
+			  {{opcion}}
+			</button>
+
+			<br><br>
+			<br>
+
+  		</div>
+  			<center><p><strong>Su puntaje es {{usuario.puntaje}}</strong></p><br>
+			<button class="button button-positive" ng-show="usuario.pregunta1 && usuario.pregunta2 && usuario.pregunta3" ng-click="Salir()" ui-sref="tab.login">
+			  Fin
+			</button></center>
   </ion-content>
 </ion-view>
