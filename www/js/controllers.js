@@ -10,7 +10,7 @@ angular.module('starter.controllers', [])
 	}
 })
 
-.controller('TriviaCtrl', function($scope, $timeout, $stateParams, $state) {
+.controller('TriviaCtrl', function($scope, $timeout, $stateParams, $state, $cordovaVibration, $cordovaNativeAudio, $ionicPlatform) {
 
 	var nombre=JSON.parse($stateParams.nombre);
   	$scope.usuario={};
@@ -36,13 +36,53 @@ angular.module('starter.controllers', [])
 	  			alert("Correcto!!");
 	  			$scope.usuario.pregunta1="bien";
 	  			$scope.usuario.puntaje+=pregunta.puntos;
-	  			$scope.usuario.correcto=true;
+	  			try
+				{
+				    $cordovaVibration.vibrate(100);
+				}
+				catch(e)
+				{
+				    console.log(e);
+				}
+				$ionicPlatform.ready(function() {
+      				$cordovaNativeAudio.preloadSimple('si', 'audio/si.mp3')
+              						.then(function(msg) { console.log(msg); })
+             						.catch(function(error) { console.error(error); });
+           		});
+    
+    			$cordovaNativeAudio.play('si')
+            		.then(function(msg) { console.log(msg); })
+             		.catch(function(error) { console.error(error); });
 	  		}
 	  		else
 	  		{
 	  			alert("incorrecto");
 	  			$scope.usuario.pregunta1="mal";
-	  			$scope.usuario.correcto=false;
+	  			try
+				{
+				    $cordovaVibration.vibrate(100);
+				}
+				catch(e)
+				{
+				    console.log(e);
+				}
+				$ionicPlatform.ready(function() {
+      				$cordovaNativeAudio.preloadSimple('no', 'audio/no.mp3')
+              						.then(function(msg) { console.log(msg); })
+             						.catch(function(error) { console.error(error); });
+           		});
+    
+    			$cordovaNativeAudio.play('no')
+            		.then(function(msg) { console.log(msg); })
+             		.catch(function(error) { console.error(error); });
+				try
+				{
+				    $cordovaVibration.vibrate(100);
+				}
+				catch(e)
+				{
+				    console.log(e);
+				}
 	  		}
   		}
   		if(pregunta.id==2)
@@ -52,11 +92,53 @@ angular.module('starter.controllers', [])
 	  			alert("Correcto!!");
 	  			$scope.usuario.pregunta2="bien";
 	  			$scope.usuario.puntaje+=pregunta.puntos;
+	  			try
+				{
+				    $cordovaVibration.vibrate(100);
+				}
+				catch(e)
+				{
+				    console.log(e);
+				}
+				$ionicPlatform.ready(function() {
+      				$cordovaNativeAudio.preloadSimple('si', 'audio/si.mp3')
+              						.then(function(msg) { console.log(msg); })
+             						.catch(function(error) { console.error(error); });
+           		});
+    
+    			$cordovaNativeAudio.play('si')
+            		.then(function(msg) { console.log(msg); })
+             		.catch(function(error) { console.error(error); });
 	  		}
 	  		else
 	  		{
 	  			alert("incorrecto");
 	  			$scope.usuario.pregunta2="mal";
+	  			try
+				{
+				    $cordovaVibration.vibrate(100);
+				}
+				catch(e)
+				{
+				    console.log(e);
+				}
+				$ionicPlatform.ready(function() {
+      				$cordovaNativeAudio.preloadSimple('no', 'audio/no.mp3')
+              						.then(function(msg) { console.log(msg); })
+             						.catch(function(error) { console.error(error); });
+           		});
+    
+    			$cordovaNativeAudio.play('no')
+            		.then(function(msg) { console.log(msg); })
+             		.catch(function(error) { console.error(error); });
+	  			try
+				{
+				    $cordovaVibration.vibrate(100);
+				}
+				catch(e)
+				{
+				    console.log(e);
+				}
 	  		}
   		}
   	  	if(pregunta.id==3)
@@ -66,11 +148,53 @@ angular.module('starter.controllers', [])
 	  			alert("Correcto!!");
 	  			$scope.usuario.pregunta3="bien";
 	  			$scope.usuario.puntaje+=pregunta.puntos;
+	  			try
+				{
+				    $cordovaVibration.vibrate(100);
+				}
+				catch(e)
+				{
+				    console.log(e);
+				}
+				$ionicPlatform.ready(function() {
+      				$cordovaNativeAudio.preloadSimple('si', 'audio/si.mp3')
+              						.then(function(msg) { console.log(msg); })
+             						.catch(function(error) { console.error(error); });
+           		});
+    
+    			$cordovaNativeAudio.play('si')
+            		.then(function(msg) { console.log(msg); })
+             		.catch(function(error) { console.error(error); });
 	  		}
 	  		else
 	  		{
 	  			alert("incorrecto");
 	  			$scope.usuario.pregunta3="mal";
+	  			try
+				{
+				    $cordovaVibration.vibrate(100);
+				}
+				catch(e)
+				{
+				    console.log(e);
+				}
+				$ionicPlatform.ready(function() {
+      				$cordovaNativeAudio.preloadSimple('no', 'audio/no.mp3')
+              						.then(function(msg) { console.log(msg); })
+             						.catch(function(error) { console.error(error); });
+           		});
+    
+    			$cordovaNativeAudio.play('no')
+            		.then(function(msg) { console.log(msg); })
+             		.catch(function(error) { console.error(error); });
+	  			try
+				{
+				    $cordovaVibration.vibrate(100);
+				}
+				catch(e)
+				{
+				    console.log(e);
+				}
 	  		}
   		}
   	}
