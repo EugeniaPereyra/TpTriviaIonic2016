@@ -20,6 +20,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    if( window.plugins && window.plugins.NativeAudio ) {
+      window.plugins.NativeAudio.preloadSimple('si', 'audio/si.mp3', function(msg){
+        }, function(msg){
+            console.log( 'Error: ' + msg );
+        });
+
+      window.plugins.NativeAudio.preloadSimple('no', 'audio/no.mp3', function(msg){
+        }, function(msg){
+            console.log( 'Error: ' + msg );
+        });
+    }
   });
 })
 

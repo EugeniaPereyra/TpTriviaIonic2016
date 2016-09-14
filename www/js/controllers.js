@@ -108,7 +108,7 @@ angular.module('starter.controllers', [])
 	  			alert("incorrecto");
 	  			$scope.usuario.pregunta3="mal";
 	  			$scope.clase3.btnIncorrecto=true;
-	  			
+
 				$cordovaVibration.vibrate([100,100,100]);
     			$cordovaNativeAudio.play('no');
 			}
@@ -124,6 +124,9 @@ angular.module('starter.controllers', [])
   						puntaje:$scope.usuario.puntaje,
   						nivel: $scope.usuario.nivel });
   		$scope.usuario=null;
+  		$scope.clase1=null;
+  		$scope.clase2=null;
+  		$scope.clase3=null;
   		$state.go("tab.login");
   	}
 
