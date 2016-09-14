@@ -7,15 +7,22 @@ angular.module('starter.controllers', [])
 	$scope.Guardar=function(usuario){
 		var dato=JSON.stringify(usuario);
 		$state.go("tab.trivia",{nombre:dato});
+		$scope.usuario.nombre=null;
 	}
 })
 
-.controller('TriviaCtrl', function($scope, $timeout, $stateParams, $state, $cordovaVibration, $cordovaNativeAudio, $ionicPlatform) {
+.controller('TriviaCtrl', function($scope, $timeout, $stateParams, $state, $cordovaVibration, $cordovaNativeAudio) {
 
 	var nombre=JSON.parse($stateParams.nombre);
   	$scope.usuario={};
   	$scope.usuario.puntaje=0;
   	$scope.usuario.nombre=nombre.nombre;
+  	$scope.usuario.nivel="INICIADOR";
+
+  	$scope.clase1={};
+  	$scope.clase2={};
+  	$scope.clase3={};
+
 
   	var preguntas=new Firebase('https://trivia-ce4e1.firebaseio.com/preguntas');
   	$scope.preguntas=[];
@@ -34,55 +41,22 @@ angular.module('starter.controllers', [])
 	  		if(opcion==pregunta.respuesta)
 	  		{
 	  			alert("Correcto!!");
+	  			$scope.clase1.btnCorrecto=true;
 	  			$scope.usuario.pregunta1="bien";
 	  			$scope.usuario.puntaje+=pregunta.puntos;
-	  			try
-				{
-				    $cordovaVibration.vibrate(100);
-				}
-				catch(e)
-				{
-				    console.log(e);
-				}
-				$ionicPlatform.ready(function() {
-      				$cordovaNativeAudio.preloadSimple('si', 'audio/si.mp3')
-              						.then(function(msg) { console.log(msg); })
-             						.catch(function(error) { console.error(error); });
-           		});
-    
-    			$cordovaNativeAudio.play('si')
-            		.then(function(msg) { console.log(msg); })
-             		.catch(function(error) { console.error(error); });
+	  			$scope.usuario.nivel="PADAWAN";
+
+				$cordovaVibration.vibrate(100);
+    			$cordovaNativeAudio.play('si');
 	  		}
 	  		else
 	  		{
 	  			alert("incorrecto");
+	  			$scope.clase1.btnIncorrecto=true;
 	  			$scope.usuario.pregunta1="mal";
-	  			try
-				{
-				    $cordovaVibration.vibrate(100);
-				}
-				catch(e)
-				{
-				    console.log(e);
-				}
-				$ionicPlatform.ready(function() {
-      				$cordovaNativeAudio.preloadSimple('no', 'audio/no.mp3')
-              						.then(function(msg) { console.log(msg); })
-             						.catch(function(error) { console.error(error); });
-           		});
-    
-    			$cordovaNativeAudio.play('no')
-            		.then(function(msg) { console.log(msg); })
-             		.catch(function(error) { console.error(error); });
-				try
-				{
-				    $cordovaVibration.vibrate(100);
-				}
-				catch(e)
-				{
-				    console.log(e);
-				}
+
+				$cordovaVibration.vibrate([100,100,100]);
+    			$cordovaNativeAudio.play('no');
 	  		}
   		}
   		if(pregunta.id==2)
@@ -91,54 +65,24 @@ angular.module('starter.controllers', [])
 	  		{
 	  			alert("Correcto!!");
 	  			$scope.usuario.pregunta2="bien";
+	  			$scope.clase2.btnCorrecto=true;
 	  			$scope.usuario.puntaje+=pregunta.puntos;
-	  			try
-				{
-				    $cordovaVibration.vibrate(100);
-				}
-				catch(e)
-				{
-				    console.log(e);
-				}
-				$ionicPlatform.ready(function() {
-      				$cordovaNativeAudio.preloadSimple('si', 'audio/si.mp3')
-              						.then(function(msg) { console.log(msg); })
-             						.catch(function(error) { console.error(error); });
-           		});
-    
-    			$cordovaNativeAudio.play('si')
-            		.then(function(msg) { console.log(msg); })
-             		.catch(function(error) { console.error(error); });
+	  			if($scope.usuario.puntaje<=500&&$scope.usuario.puntaje>0)
+	  				$scope.usuario.nivel="PADAWAN";
+	  			if($scope.usuario.puntaje>500)
+	  				$scope.usuario.nivel="CABALLERO JEDI";
+
+	  			$cordovaVibration.vibrate(100);
+    			$cordovaNativeAudio.play('si');
 	  		}
 	  		else
 	  		{
 	  			alert("incorrecto");
 	  			$scope.usuario.pregunta2="mal";
-	  			try
-				{
-				    $cordovaVibration.vibrate(100);
-				}
-				catch(e)
-				{
-				    console.log(e);
-				}
-				$ionicPlatform.ready(function() {
-      				$cordovaNativeAudio.preloadSimple('no', 'audio/no.mp3')
-              						.then(function(msg) { console.log(msg); })
-             						.catch(function(error) { console.error(error); });
-           		});
-    
-    			$cordovaNativeAudio.play('no')
-            		.then(function(msg) { console.log(msg); })
-             		.catch(function(error) { console.error(error); });
-	  			try
-				{
-				    $cordovaVibration.vibrate(100);
-				}
-				catch(e)
-				{
-				    console.log(e);
-				}
+	  			$scope.clase2.btnIncorrecto=true;
+
+				$cordovaVibration.vibrate([100,100,100]);
+    			$cordovaNativeAudio.play('no');
 	  		}
   		}
   	  	if(pregunta.id==3)
@@ -147,55 +91,27 @@ angular.module('starter.controllers', [])
 	  		{
 	  			alert("Correcto!!");
 	  			$scope.usuario.pregunta3="bien";
+	  			$scope.clase3.btnCorrecto=true;
 	  			$scope.usuario.puntaje+=pregunta.puntos;
-	  			try
-				{
-				    $cordovaVibration.vibrate(100);
-				}
-				catch(e)
-				{
-				    console.log(e);
-				}
-				$ionicPlatform.ready(function() {
-      				$cordovaNativeAudio.preloadSimple('si', 'audio/si.mp3')
-              						.then(function(msg) { console.log(msg); })
-             						.catch(function(error) { console.error(error); });
-           		});
-    
-    			$cordovaNativeAudio.play('si')
-            		.then(function(msg) { console.log(msg); })
-             		.catch(function(error) { console.error(error); });
+	  			if($scope.usuario.puntaje<=500&&$scope.usuario.puntaje>0)
+	  				$scope.usuario.nivel="PADAWAN";
+	  			if($scope.usuario.puntaje>500 && $scope.usuario.puntaje<800)
+	  				$scope.usuario.nivel="CABALLERO JEDI";
+	  			if($scope.usuario.puntaje>=800)
+	  				$scope.usuario.nivel="MAESTRO JEDI";
+
+				$cordovaVibration.vibrate(100);
+    			$cordovaNativeAudio.play('si');
 	  		}
 	  		else
 	  		{
 	  			alert("incorrecto");
 	  			$scope.usuario.pregunta3="mal";
-	  			try
-				{
-				    $cordovaVibration.vibrate(100);
-				}
-				catch(e)
-				{
-				    console.log(e);
-				}
-				$ionicPlatform.ready(function() {
-      				$cordovaNativeAudio.preloadSimple('no', 'audio/no.mp3')
-              						.then(function(msg) { console.log(msg); })
-             						.catch(function(error) { console.error(error); });
-           		});
-    
-    			$cordovaNativeAudio.play('no')
-            		.then(function(msg) { console.log(msg); })
-             		.catch(function(error) { console.error(error); });
-	  			try
-				{
-				    $cordovaVibration.vibrate(100);
-				}
-				catch(e)
-				{
-				    console.log(e);
-				}
-	  		}
+	  			$scope.clase3.btnIncorrecto=true;
+	  			
+				$cordovaVibration.vibrate([100,100,100]);
+    			$cordovaNativeAudio.play('no');
+			}
   		}
   	}
 
@@ -205,7 +121,9 @@ angular.module('starter.controllers', [])
   						pregunta1:$scope.usuario.pregunta1,
   						pregunta2:$scope.usuario.pregunta2,
   						pregunta3:$scope.usuario.pregunta3,
-  						puntaje:$scope.usuario.puntaje });
+  						puntaje:$scope.usuario.puntaje,
+  						nivel: $scope.usuario.nivel });
+  		$scope.usuario=null;
   		$state.go("tab.login");
   	}
 

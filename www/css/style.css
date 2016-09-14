@@ -4,44 +4,36 @@
     background-color: black;
 }
 
-.signup-background-login {
-    background: url('../img/1.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-}
-
 .autor{
 	background-color: #610B4B;
 }
 
 h2{
-	color:#40FF00;
+	color:yellow;
 	text-align: center;
 }
 
 h3{
-	color:#40FF00;
+	color:yellow;
 	text-align: center;
 }
 
 p{
-	color:#40FF00;
+	color:yellow;
 	text-align: center;
 	font-size: 16px;
 }
 
-.btn-correcto
+.btnCorrecto
 {
-	background-color: green;
-	color: black;
+	background-color: #00FF00;
+	color: white;
 
 }
 
-.btn-incorrecto
+.btnIncorrecto
 {
-	background-color: red;
+	background-color: #FE2E2E;
 	color: white;	
 }
 
