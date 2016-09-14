@@ -1,34 +1,38 @@
-<ion-view view-title="Trivia" class="signup-background">
+<ion-view view-title="Trivia" class="signup-background" >
   <ion-content>
       <br><br>
   		<h2 style="color:yellow"><strong>{{usuario.nombre}}</strong></h2><br>
-  		<div ng-repeat="pregunta in preguntas">
+      
+    		<div ng-repeat="pregunta in preguntas">
 
-    			<h3 ng-show="pregunta.id==1 && usuario.nombre"><strong>{{pregunta.pregunta}}</strong></h3>
+          <div ng-show="pregunta.id==1 && usuario.nombre">
+      			<h3><strong>{{pregunta.pregunta}}</strong></h3>
+      			<button class="button button-block" ng-repeat="opcion in pregunta.opciones" ng-click="Verificar(opcion, pregunta)" ng-disabled="usuario.pregunta1" ng-class="clase1"><strong>
+    			  {{opcion}}</strong>
+    			 </button>
+          </div>
 
-    			<button class="button button-block" ng-repeat="opcion in pregunta.opciones" ng-show="pregunta.id==1 && usuario.nombre" ng-click="Verificar(opcion, pregunta)" ng-disabled="usuario.pregunta1" ng-class="clase1" ><strong>
-  			  {{opcion}}</strong>
-  			 </button>
+          <div ng-show="pregunta.id==2 && usuario.pregunta1">
+      			<h3><strong>{{pregunta.pregunta}}</strong></h3>
+      			<button class="button button-block" ng-repeat="opcion in pregunta.opciones" ng-click="Verificar(opcion, pregunta)" ng-disabled="usuario.pregunta2" ng-class="clase2"><strong>
+    			  {{opcion}}</strong>
+    			 </button>
+          </div>
 
-    			<h3 ng-show="pregunta.id==2 && usuario.pregunta1"><strong>{{pregunta.pregunta}}</strong></h3>
+          <div ng-show="pregunta.id==3 && usuario.pregunta1 && usuario.pregunta2">
+      			<h3><strong>{{pregunta.pregunta}}</strong></h3>
+      			<button class="button button-block" ng-repeat="opcion in pregunta.opciones" ng-click="Verificar(opcion, pregunta)" ng-disabled="usuario.pregunta3" ng-class="clase3"><strong>
+    			  {{opcion}}</strong>
+    			</button>
+          </div>
+    			<br><br><br>
+    		</div>
 
-    			<button class="button button-block" ng-repeat="opcion in pregunta.opciones" ng-show="pregunta.id==2 && usuario.pregunta1" ng-click="Verificar(opcion, pregunta)" ng-disabled="usuario.pregunta2" ng-class="clase2"><strong>
-  			  {{opcion}}</strong>
-  			 </button>
-
-    			<h3 ng-show="pregunta.id==3 && usuario.pregunta1 && usuario.pregunta2"><strong>{{pregunta.pregunta}}</strong></h3>
-
-    			<button class="button button-block" ng-repeat="opcion in pregunta.opciones" ng-show="pregunta.id==3 && usuario.pregunta1 && usuario.pregunta2" ng-click="Verificar(opcion, pregunta)" ng-disabled="usuario.pregunta3" ng-class="clase3"><strong>
-  			  {{opcion}}</strong>
-  			</button>
-
-			<br><br>
-			<br>
-
-  		</div>
-  			<p ng-show="usuario.pregunta1 && usuario.pregunta2 && usuario.pregunta3"><strong>Tu puntaje es {{usuario.puntaje}}, sos {{usuario.nivel}}!!</strong></p><br>
-			<center><button class="button button-energized" ng-show="usuario.pregunta1 && usuario.pregunta2 && usuario.pregunta3" ng-click="Salir()">
+      <div ng-show="usuario.pregunta1 && usuario.pregunta2 && usuario.pregunta3">
+  			<p style="font-size:40px"><strong>{{usuario.puntaje}} puntos</strong></p><br>
+			<center><button class="button button-energized" ng-click="Salir()">
 			  Salir
 			</button></center>
+      </div>
   </ion-content>
 </ion-view>

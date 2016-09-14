@@ -1,6 +1,7 @@
 angular.module('starter.controllers', [])
 
 .controller('LoginCtrl', function($scope, $state) {
+
 	$scope.usuario={};
 	$scope.usuario.nombre;
 
@@ -11,8 +12,7 @@ angular.module('starter.controllers', [])
 	}
 })
 
-.controller('TriviaCtrl', function($scope, $timeout, $stateParams, $state, $cordovaVibration, $cordovaNativeAudio) {
-
+.controller('TriviaCtrl', function($scope, $timeout, $stateParams, $state, $cordovaVibration, $cordovaNativeAudio, $ionicPopup) {
 	var nombre=JSON.parse($stateParams.nombre);
   	$scope.usuario={};
   	$scope.usuario.puntaje=0;
@@ -22,7 +22,6 @@ angular.module('starter.controllers', [])
   	$scope.clase1={};
   	$scope.clase2={};
   	$scope.clase3={};
-
 
   	var preguntas=new Firebase('https://trivia-ce4e1.firebaseio.com/preguntas');
   	$scope.preguntas=[];
@@ -40,7 +39,11 @@ angular.module('starter.controllers', [])
   		{
 	  		if(opcion==pregunta.respuesta)
 	  		{
-	  			alert("Correcto!!");
+	  			$ionicPopup.alert({
+     					title: 'BIEN!!',
+     					cssClass:'bien',
+     					okType: 'button-balanced'
+   				});
 	  			$scope.clase1.btnCorrecto=true;
 	  			$scope.usuario.pregunta1="bien";
 	  			$scope.usuario.puntaje+=pregunta.puntos;
@@ -51,7 +54,11 @@ angular.module('starter.controllers', [])
 	  		}
 	  		else
 	  		{
-	  			alert("incorrecto");
+	  			$ionicPopup.alert({
+     					title: 'MAL!!',
+     					cssClass:'mal',
+     					okType: 'button-assertive'
+   				});
 	  			$scope.clase1.btnIncorrecto=true;
 	  			$scope.usuario.pregunta1="mal";
 
@@ -63,7 +70,11 @@ angular.module('starter.controllers', [])
   		{
 	  		if(opcion==pregunta.respuesta)
 	  		{
-	  			alert("Correcto!!");
+	  			$ionicPopup.alert({
+     					title: 'BIEN!!',
+     					cssClass:'bien',
+     					okType: 'button-balanced'
+   				});
 	  			$scope.usuario.pregunta2="bien";
 	  			$scope.clase2.btnCorrecto=true;
 	  			$scope.usuario.puntaje+=pregunta.puntos;
@@ -77,10 +88,19 @@ angular.module('starter.controllers', [])
 	  		}
 	  		else
 	  		{
-	  			alert("incorrecto");
+	  			$ionicPopup.alert({
+     					title: 'MAL!!',
+     					cssClass:'mal',
+     					okType: 'button-assertive'
+   				});
 	  			$scope.usuario.pregunta2="mal";
 	  			$scope.clase2.btnIncorrecto=true;
-
+	  			if($scope.usuario.puntaje>100)
+	  				$scope.usuario.puntaje-=100;
+	  			if($scope.usuario.puntaje<=500&&$scope.usuario.puntaje>0)
+	  				$scope.usuario.nivel="PADAWAN";
+	  			if($scope.usuario.puntaje>500)
+	  				$scope.usuario.nivel="CABALLERO JEDI";
 				$cordovaVibration.vibrate([100,100,100]);
     			$cordovaNativeAudio.play('no');
 	  		}
@@ -89,7 +109,11 @@ angular.module('starter.controllers', [])
   		{
 	  		if(opcion==pregunta.respuesta)
 	  		{
-	  			alert("Correcto!!");
+	  			$ionicPopup.alert({
+     					title: 'BIEN!!',
+     					cssClass:'bien',
+     					okType: 'button-balanced'
+   				});
 	  			$scope.usuario.pregunta3="bien";
 	  			$scope.clase3.btnCorrecto=true;
 	  			$scope.usuario.puntaje+=pregunta.puntos;
@@ -105,10 +129,21 @@ angular.module('starter.controllers', [])
 	  		}
 	  		else
 	  		{
-	  			alert("incorrecto");
+	  			$ionicPopup.alert({
+     					title: 'MAL!!',
+     					cssClass:'mal',
+     					okType: 'button-assertive'
+   				});
 	  			$scope.usuario.pregunta3="mal";
 	  			$scope.clase3.btnIncorrecto=true;
-
+	  			if($scope.usuario.puntaje>100)
+	  				$scope.usuario.puntaje-=100;
+	  			if($scope.usuario.puntaje<=500&&$scope.usuario.puntaje>0)
+	  				$scope.usuario.nivel="PADAWAN";
+	  			if($scope.usuario.puntaje>500 && $scope.usuario.puntaje<800)
+	  				$scope.usuario.nivel="CABALLERO JEDI";
+	  			if($scope.usuario.puntaje>=800)
+	  				$scope.usuario.nivel="MAESTRO JEDI";
 				$cordovaVibration.vibrate([100,100,100]);
     			$cordovaNativeAudio.play('no');
 			}
@@ -123,13 +158,17 @@ angular.module('starter.controllers', [])
   						pregunta3:$scope.usuario.pregunta3,
   						puntaje:$scope.usuario.puntaje,
   						nivel: $scope.usuario.nivel });
-  		$scope.usuario=null;
-  		$scope.clase1=null;
-  		$scope.clase2=null;
-  		$scope.clase3=null;
+  		$ionicPopup.alert({
+     					title: 'Tu puntaje es '+$scope.usuario.puntaje+', <br>sos un '+$scope.usuario.nivel+'!!<br> Que la fuerza te acompañe!!',
+     					cssClass:'salida',
+     					okType: 'button-energized'
+   				});
+  		  	$scope.usuario={};
+		  	$scope.clase1={};
+		  	$scope.clase2={};
+		  	$scope.clase3={};
   		$state.go("tab.login");
   	}
-
 })
 
 

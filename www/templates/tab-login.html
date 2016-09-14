@@ -3,12 +3,12 @@
   <br><br>
     <h2>Ingresa tu nombre</h2>
 
-    <form>
+    <form name="login" novalidate>
       <div class="list">
         <label class="item item-input">
-          <input type="text" placeholder="Nombre" ng-model="usuario.nombre">
+          <input name="nombre" type="text" placeholder="Nombre" ng-model="usuario.nombre" required>
         </label>
-        <button class="button button-block button-energized" ng-click="Guardar(usuario)"><p style="color:black"><strong>Jugar!</strong></p></button>
+        <button class="button button-block button-energized" ng-click="Guardar(usuario)" ng-show="login.nombre.$valid"><p style="color:black"><strong>Jugar!</strong></p></button>
       </div>
     </form>
   </ion-content>
