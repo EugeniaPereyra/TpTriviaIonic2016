@@ -6,9 +6,9 @@
     <form name="login" novalidate>
       <div class="list">
         <label class="item item-input">
-          <input name="nombre" type="text" placeholder="Nombre" ng-model="usuario.nombre" required>
+          <input name="nombre" type="text" placeholder="Nombre" ng-model="usuarioLog.nombreLog">
         </label>
-        <button class="button button-block button-energized" ng-click="Guardar(usuario)" ng-show="login.nombre.$valid"><p style="color:black"><strong>Jugar!</strong></p></button>
+        <button class="button button-block button-energized" ng-click="Guardar()" ng-show="usuarioLog.nombreLog"><p style="color:black"><strong>Jugar!</strong></p></button>
       </div>
     </form>
   </ion-content>
