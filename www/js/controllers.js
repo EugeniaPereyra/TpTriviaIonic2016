@@ -1,12 +1,7 @@
 angular.module('starter.controllers', [])
 
 .controller('LoginCtrl', function($scope, $state) {
-	$scope.usuarioLog=null;
 	$scope.usuarioLog={};
-
-	// $scope.$watch("usuarioLog.nombreLog", function(newVal) {
- //        console.log(newVal);
- //    });
 
 	$scope.Guardar=function(){
 		var dato=JSON.stringify($scope.usuarioLog);
@@ -17,19 +12,15 @@ angular.module('starter.controllers', [])
 
 .controller('TriviaCtrl', function($scope, $timeout, $stateParams, $state, $cordovaVibration, $cordovaNativeAudio, $ionicPopup, $http) {
   	$scope.usuario={};
-	var nombre=JSON.parse($stateParams.nombre);
+	 var nombre=JSON.parse($stateParams.nombre);
   	$scope.usuario.puntaje=0;
   	$scope.usuario.nombre=nombre.nombreLog;
   	$scope.usuario.nivel="INICIADOR";
 
-  	// $scope.$watch("usuario", function(newVal) {
-   //      console.log(newVal);
-   //  });
-
   	$scope.clase1={};
   	$scope.clase2={};
   	$scope.clase3={};
-	$scope.preguntas=[];
+	 $scope.preguntas=[];
   	
   	$http.get('preguntas/preguntas.json')
       .then(function(respuesta) {
@@ -219,12 +210,11 @@ angular.module('starter.controllers', [])
   						puntaje: $scope.usuario.puntaje,
   						nivel: $scope.usuario.nivel });
   		$ionicPopup.alert({
-     					title: 'Tu puntaje es '+$scope.usuario.puntaje+', <br>sos un '+$scope.usuario.nivel+'!!<br> Que la fuerza te acompañe!!',
+     					title: 'Tu puntaje es '+$scope.usuario.puntaje+', <br>sos un '+$scope.usuario.nivel+'!!<br><br> Que la fuerza te acompañe!!',
      					cssClass:'salida',
      					okType: 'button-energized',
    				});
-   		$scope.usuario=null;
-   		$scope.usuario={};
+
   		$state.go("tab.login");
    	}
 })

@@ -1,6 +1,6 @@
 [{
   "id": 1,
-  "pregunta": "De qué color es el sable láser de Obi-Wan Kenobi??",
+  "pregunta": "¿De qué color es el sable láser de Obi-Wan Kenobi?",
   "respuesta": "azul",
   "puntos": 300,
   "opciones":
@@ -12,7 +12,7 @@
 }, 
 {
   "id": 2,
-  "pregunta": "De qué color es el sable láser de Darth Vader??",
+  "pregunta": "¿De qué color es el sable láser de Darth Vader?",
   "respuesta": "rojo",
   "puntos": 350,
   "opciones":
@@ -24,7 +24,7 @@
 },
 {
   "id": 3,
-  "pregunta": "De qué color es el sable láser del maestro Yoda??",
+  "pregunta": "¿De qué color es el sable láser del maestro Yoda?",
   "respuesta": "verde",
   "puntos": 400,
   "opciones":
