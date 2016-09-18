@@ -1,0 +1,77 @@
+/* Empty. Add your own CSS if you like */
+
+.signup-background {
+    background-color: black;
+}
+
+.autor{
+	background-color: #610B4B;
+}
+
+h2{
+	color:yellow;
+	text-align: center;
+}
+
+h3{
+	color:yellow;
+	text-align: center;
+}
+
+p{
+	color:yellow;
+	text-align: center;
+	font-size: 16px;
+}
+
+.btnCorrecto
+{
+	background-color: #00FF00;
+	color: white;
+	animation-name: bounce;
+	animation-duration: 1s;
+
+}
+
+.btnIncorrecto
+{
+	background-color: #FE2E2E;
+	color: white;	
+	animation-name: shake;
+	animation-duration: 1s;
+}
+
+ion-icon{
+	color:yellow;
+	font-size: 20px;
+}
+
+.bien{
+	background-color:#00FF00;
+	animation-name: bounce;
+	animation-duration: 1s;
+}
+.bien .popup-title {
+    color: black;
+    font-weight: bold;
+}
+
+.mal{
+	background-color:#FE2E2E;
+	animation-name: shake;
+	animation-duration: 1s;
+}
+.mal .popup-title {
+    color: black;
+    font-weight: bold;
+}
+
+.salida{
+
+}
+.salida .popup-title {
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+}
+

@@ -1,0 +1,15 @@
+<ion-view view-title="Login" class="signup-background" >
+  <ion-content class="padding">
+  <br><br>
+    <h2>Ingresa tu nombre</h2>
+
+    <form name="login" novalidate>
+      <div class="list">
+        <label class="item item-input">
+          <input name="nombre" type="text" placeholder="Nombre" ng-model="usuarioLog.nombreLog">
+        </label>
+        <button class="button button-block button-energized" ng-click="Guardar()" ng-show="usuarioLog.nombreLog"><p style="color:black"><strong>Jugar!</strong></p></button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>
