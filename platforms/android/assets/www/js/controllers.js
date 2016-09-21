@@ -13,12 +13,12 @@ angular.module('starter.controllers', [])
 .controller('TriviaCtrl', function($scope, $timeout, $stateParams, $state, $cordovaVibration, $cordovaNativeAudio, $ionicPopup, $http, $cordovaFile) {
   document.addEventListener("deviceready", 
     function onDeviceReady() {
-      $cordovaFile.createFile(cordova.file.externalRootDirectory, "trivia.txt",true) // cordova.file.dataDirectory //cordova.file.externalRootDirectory
-        .then(function (success) {
-          // success
-        }, function (error) {
-          // error
-        });
+        $cordovaFile.createFile(cordova.file.externalRootDirectory, "trivia.txt",true) // cordova.file.dataDirectory //cordova.file.externalRootDirectory
+          .then(function (success) {
+            // success
+          }, function (error) {
+            // error
+          });
     }, false);
 
     $scope.usuario={};
@@ -31,6 +31,7 @@ angular.module('starter.controllers', [])
   	$scope.clase2={};
   	$scope.clase3={};
 	 $scope.preguntas=[];
+   $scope.jugadores=[];
   	
   	$http.get('preguntas/preguntas.json')
       .then(function(respuesta) {
@@ -40,13 +41,27 @@ angular.module('starter.controllers', [])
      		console.log(error);
  	 });
 
+  $cordovaFile.checkFile(cordova.file.externalRootDirectory, "trivia.txt") // cordova.file.dataDirectory //cordova.file.externalRootDirectory
+        .then(function (success) {
+          // succes
+          $cordovaFile.readAsText(cordova.file.externalRootDirectory, "trivia.txt")
+                  .then(function (success) {
+                    var dato=JSON.parse(success);
+                    $scope.jugadores=dato;
+                  }, function (error) {
+                    // error
+                  });
+        }, function (error) {
+          // error
+        });
+
   	$scope.Verificar=function(opcion,pregunta){
   		if(pregunta.id==1)
   		{
   			$scope.usuario.pregunta1=pregunta.pregunta;
 	  		$scope.usuario.respuesta1=pregunta.respuesta;
-	  		$scope.usuario.respUser1=opcion;
-	  		$scope.usuario.valor1=pregunta.puntos;
+	  		$scope.usuario.respuestaUsuario1=opcion;
+	  		$scope.usuario.valorPregunta1=pregunta.puntos;
 	  		if(opcion==pregunta.respuesta)
 	  		{
 	  			$ionicPopup.alert({
@@ -92,8 +107,8 @@ angular.module('starter.controllers', [])
   		{
   		  	$scope.usuario.pregunta2=pregunta.pregunta;
 	  		$scope.usuario.respuesta2=pregunta.respuesta;
-	  		$scope.usuario.respUser2=opcion;
-	  		$scope.usuario.valor2=pregunta.puntos;
+	  		$scope.usuario.respuestaUsuario2=opcion;
+	  		$scope.usuario.valorPregunta2=pregunta.puntos;
 	  		if(opcion==pregunta.respuesta)
 	  		{
 	  			$ionicPopup.alert({
@@ -142,8 +157,8 @@ angular.module('starter.controllers', [])
   		{
   		  	$scope.usuario.pregunta3=pregunta.pregunta;
 	  		$scope.usuario.respuesta3=pregunta.respuesta;
-	  		$scope.usuario.respUser3=opcion;
-	  		$scope.usuario.valor3=pregunta.puntos;
+	  		$scope.usuario.respuestaUsuario3=opcion;
+	  		$scope.usuario.valorPregunta3=pregunta.puntos;
 	  		if(opcion==pregunta.respuesta)
 	  		{
 	  			$ionicPopup.alert({
@@ -196,23 +211,26 @@ angular.module('starter.controllers', [])
   	var usuarios=new Firebase('https://trivia-ce4e1.firebaseio.com/usuarios');
 
     $scope.Salir=function(){
-  		usuarios.push({usuario: $scope.usuario.nombre, 
+  		usuarios.push({nombre: $scope.usuario.nombre, 
   						pregunta1: $scope.usuario.pregunta1,
   						respuesta1: $scope.usuario.respuesta1,
-  						valorPregunta1: $scope.usuario.valor1,
-  						respuestaUsuario1: $scope.usuario.respUser1,
+  						valorPregunta1: $scope.usuario.valorPregunta1,
+  						respuestaUsuario1: $scope.usuario.respuestaUsuario1,
   						pregunta2: $scope.usuario.pregunta2,
   						respuesta2: $scope.usuario.respuesta2,
-  						valorPregunta2: $scope.usuario.valor2,
-  						respuestaUsuario2: $scope.usuario.respUser2,
+  						valorPregunta2: $scope.usuario.valorPregunta2,
+  						respuestaUsuario2: $scope.usuario.respuestaUsuario2,
   						pregunta3: $scope.usuario.pregunta3,
   						respuesta3: $scope.usuario.respuesta3,
-  						valorPregunta3: $scope.usuario.valor3,
-  						respuestaUsuario3: $scope.usuario.respUser3,
+  						valorPregunta3: $scope.usuario.valorPregunta3,
+  						respuestaUsuario3: $scope.usuario.respuestaUsuario3,
   						puntaje: $scope.usuario.puntaje,
   						nivel: $scope.usuario.nivel });
 
-      $cordovaFile.writeFile(cordova.file.externalRootDirectory, "trivia.txt", $scope.usuario, true)
+      $scope.jugadores.push($scope.usuario);
+      var dato=JSON.stringify($scope.jugadores);
+
+      $cordovaFile.writeFile(cordova.file.externalRootDirectory, "trivia.txt", dato, true)
               .then(function (success) {
                 console.log("archivo guardado");
               }, function (error) {
