@@ -7,21 +7,21 @@
 
           <div ng-show="pregunta.id==1 && usuario.nombre">
       			<h3><strong>{{pregunta.pregunta}}</strong></h3>
-      			<button class="button button-block" ng-repeat="opcion in pregunta.opciones" ng-click="Verificar(opcion, pregunta)" ng-disabled="contestada1" ng-class="clase1"><strong>
-    			  {{opcion}}</strong>
-    			 </button>
+              <button class="button" ng-repeat="opcion in pregunta.opciones" ng-click="Verificar(opcion, pregunta)" ng-disabled="contestada1" ng-class="clase1"><strong>
+      			  {{opcion}}</strong>
+      			 </button>
           </div>
 
           <div ng-show="pregunta.id==2 && contestada1">
       			<h3><strong>{{pregunta.pregunta}}</strong></h3>
-      			<button class="button button-block" ng-repeat="opcion in pregunta.opciones" ng-click="Verificar(opcion, pregunta)" ng-disabled="contestada2" ng-class="clase2"><strong>
+      			<button class="button" ng-repeat="opcion in pregunta.opciones" ng-click="Verificar(opcion, pregunta)" ng-disabled="contestada2" ng-class="clase2"><strong>
     			  {{opcion}}</strong>
     			 </button>
           </div>
 
           <div ng-show="pregunta.id==3 && contestada1 && contestada2">
       			<h3><strong>{{pregunta.pregunta}}</strong></h3>
-      			<button class="button button-block" ng-repeat="opcion in pregunta.opciones" ng-click="Verificar(opcion, pregunta)" ng-disabled="contestada3" ng-class="clase3"><strong>
+      			<button class="button" ng-repeat="opcion in pregunta.opciones" ng-click="Verificar(opcion, pregunta)" ng-disabled="contestada3" ng-class="clase3"><strong>
     			  {{opcion}}</strong>
     			</button>
           </div>

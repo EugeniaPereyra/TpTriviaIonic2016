@@ -10,8 +10,18 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('TriviaCtrl', function($scope, $timeout, $stateParams, $state, $cordovaVibration, $cordovaNativeAudio, $ionicPopup, $http) {
-  	$scope.usuario={};
+.controller('TriviaCtrl', function($scope, $timeout, $stateParams, $state, $cordovaVibration, $cordovaNativeAudio, $ionicPopup, $http, $cordovaFile) {
+  document.addEventListener("deviceready", 
+    function onDeviceReady() {
+      $cordovaFile.createFile(cordova.file.externalRootDirectory, "trivia.txt",true) // cordova.file.dataDirectory //cordova.file.externalRootDirectory
+        .then(function (success) {
+          // success
+        }, function (error) {
+          // error
+        });
+    }, false);
+
+    $scope.usuario={};
 	 var nombre=JSON.parse($stateParams.nombre);
   	$scope.usuario.puntaje=0;
   	$scope.usuario.nombre=nombre.nombreLog;
@@ -29,15 +39,6 @@ angular.module('starter.controllers', [])
       },function (error) {
      		console.log(error);
  	 });
-  	
-	//var preguntas=new Firebase('https://trivia-ce4e1.firebaseio.com/preguntas');
-  	// preguntas.on('child_added', function (snapshot){
-  	// 	$timeout(function(){
-  	// 		var pregunta=snapshot.val();
-  	// 		$scope.preguntas.push(pregunta);
-  	// 		//console.log($scope.preguntas);
-  	// 	});
-  	// });
 
   	$scope.Verificar=function(opcion,pregunta){
   		if(pregunta.id==1)
@@ -193,7 +194,8 @@ angular.module('starter.controllers', [])
   	}
 
   	var usuarios=new Firebase('https://trivia-ce4e1.firebaseio.com/usuarios');
-  	$scope.Salir=function(){
+
+    $scope.Salir=function(){
   		usuarios.push({usuario: $scope.usuario.nombre, 
   						pregunta1: $scope.usuario.pregunta1,
   						respuesta1: $scope.usuario.respuesta1,
@@ -209,7 +211,15 @@ angular.module('starter.controllers', [])
   						respuestaUsuario3: $scope.usuario.respUser3,
   						puntaje: $scope.usuario.puntaje,
   						nivel: $scope.usuario.nivel });
-  		$ionicPopup.alert({
+
+      $cordovaFile.writeFile(cordova.file.externalRootDirectory, "trivia.txt", $scope.usuario, true)
+              .then(function (success) {
+                console.log("archivo guardado");
+              }, function (error) {
+                // error
+              });
+  		
+      $ionicPopup.alert({
      					title: 'Tu puntaje es '+$scope.usuario.puntaje+', <br>sos un '+$scope.usuario.nivel+'!!<br><br> Que la fuerza te acompañe!!',
      					cssClass:'salida',
      					okType: 'button-energized',
@@ -219,6 +229,19 @@ angular.module('starter.controllers', [])
    	}
 })
 
+.controller('GrabadoCtrl', function($scope, $cordovaFile) {
+  $scope.archivo={};
+  document.addEventListener("deviceready", 
+    function onDeviceReady() {
+      $cordovaFile.readAsText(cordova.file.externalRootDirectory, "trivia.txt")
+              .then(function (success) {
+                var dato=JSON.parse(success);
+                $scope.archivo=dato;
+              }, function (error) {
+                // error
+              });
+    }, false);
+})
 
 .controller('AutorCtrl', function($scope) {
 	$scope.autor={};

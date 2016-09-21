@@ -8,6 +8,10 @@
 	background-color: #610B4B;
 }
 
+.guardado{
+	background-color: #11c1f3;
+}
+
 h2{
 	color:yellow;
 	text-align: center;
@@ -28,17 +32,12 @@ p{
 {
 	background-color: #00FF00;
 	color: white;
-	animation-name: bounce;
-	animation-duration: 1s;
-
 }
 
 .btnIncorrecto
 {
 	background-color: #FE2E2E;
 	color: white;	
-	animation-name: shake;
-	animation-duration: 1s;
 }
 
 ion-icon{
@@ -75,3 +74,10 @@ ion-icon{
     font-size: 18px;
 }
 
+.button{
+	width:350px; 
+	display:block; 
+	margin-bottom:5px;
+	margin-right: auto;
+	margin-left: auto;
+}
