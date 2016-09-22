@@ -1,26 +1,25 @@
 <ion-view view-title="Guardado" class="guardado">
   <ion-content>
   <br>
+  <h4 style="color:black; text-align:center">Historial de jugadas</h4>
+  <h4 style="color:black; text-align:center">-------------------------------</h4>
   	<div ng-repeat="usuario in archivo">
   		<p style="color:black"><strong>Usuario:</strong> {{usuario.nombre}}</p>
   		<p style="color:black"><strong>Pregunta 1:</strong> {{usuario.pregunta1}}</p>
       <p style="color:black"><strong>Respuesta Correcta:</strong> {{usuario.respuesta1}}</p>
-      <p style="color:black"><strong>Puntos:</strong> {{usuario.valorPregunta1}}</p>
       <p style="color:black"><strong>Respuesta del usuario:</strong> {{usuario.respuestaUsuario1}}</p>
 
       <p style="color:black"><strong>Pregunta 2:</strong> {{usuario.pregunta2}}</p>
       <p style="color:black"><strong>Respuesta Correcta:</strong> {{usuario.respuesta2}}</p>
-      <p style="color:black"><strong>Puntos:</strong> {{usuario.valorPregunta2}}</p>
       <p style="color:black"><strong>Respuesta del usuario:</strong> {{usuario.respuestaUsuario2}}</p>
 
       <p style="color:black"><strong>Pregunta 3:</strong> {{usuario.pregunta3}}</p>
       <p style="color:black"><strong>Respuesta Correcta:</strong> {{usuario.respuesta3}}</p>
-      <p style="color:black"><strong>Puntos:</strong> {{usuario.valorPregunta3}}</p>
       <p style="color:black"><strong>Respuesta del usuario:</strong> {{usuario.respuestaUsuario3}}</p>
 
       <p style="color:black"><strong>Puntaje Total:</strong> {{usuario.puntaje}}</p>
       <p style="color:black"><strong>Nivel del usuario:</strong> {{usuario.nivel}}</p>
-      <center><br>-------------------------------<br></center>
+      <center><strong>-------------------------------</strong></center>
   	</div>
 
   </ion-content>
