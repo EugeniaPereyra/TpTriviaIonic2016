@@ -1,7 +1,7 @@
 <ion-view view-title="Trivia" class="signup-background" >
   <ion-content >
       <br><br>
-  		<h2 style="color:yellow"><strong>{{usuario.nombre}}</strong></h2><br>
+  		<h2  ng-show="usuario.nombre" style="color:yellow"><strong>{{usuario.nombre}}</strong></h2><br>
       
     		<div ng-repeat="pregunta in preguntas">
 
@@ -28,7 +28,7 @@
     			<br><br><br>
     		</div>
 
-      <div ng-show="usuario.pregunta1 && usuario.pregunta2 && usuario.pregunta3">
+      <div ng-show="usuario.pregunta1 && usuario.pregunta2 && usuario.pregunta3 && usuario.nombre">
   			<p style="font-size:40px"><strong>{{usuario.puntaje}} puntos</strong></p><br>
 			<center><button class="button button-energized" ng-click="Salir()">
 			  Salir

@@ -11,15 +11,6 @@ angular.module('starter.controllers', [])
 
 
 .controller('TriviaCtrl', function($scope, $timeout, $stateParams, $state, $cordovaVibration, $cordovaNativeAudio, $ionicPopup, $http, $cordovaFile) {
-  document.addEventListener("deviceready", 
-    function onDeviceReady() {
-        $cordovaFile.createFile(cordova.file.externalRootDirectory, "trivia.txt",true) // cordova.file.dataDirectory //cordova.file.externalRootDirectory
-          .then(function (success) {
-            // success
-          }, function (error) {
-            // error
-          });
-    }, false);
 
     $scope.usuario={};
 	 var nombre=JSON.parse($stateParams.nombre);
@@ -27,11 +18,24 @@ angular.module('starter.controllers', [])
   	$scope.usuario.nombre=nombre.nombreLog;
   	$scope.usuario.nivel="INICIADOR";
 
+  document.addEventListener("deviceready", 
+    function onDeviceReady() {
+        $cordovaFile.createFile(cordova.file.externalRootDirectory, "trivia.txt",true) // cordova.file.dataDirectory //cordova.file.externalRootDirectory
+          .then(function (success) {
+            // success
+            console.log("archivo creado");
+          }, function (error) {
+            // error
+            console.log(error);
+          });
+    }, false);
+
   	$scope.clase1={};
   	$scope.clase2={};
   	$scope.clase3={};
 	 $scope.preguntas=[];
    $scope.jugadores=[];
+   var usuarios=new Firebase('https://trivia-ce4e1.firebaseio.com/USUARIOS');
   	
     // CARGA PREGUNTAS DESDE UN ARCHIVO JSON (PARA PODER JUGAR SIN CONEXION)
   	// $http.get('preguntas/preguntas.json')
@@ -51,6 +55,7 @@ angular.module('starter.controllers', [])
      });
     });
 
+
     try{
       $cordovaFile.checkFile(cordova.file.externalRootDirectory, "trivia.txt") // cordova.file.dataDirectory //cordova.file.externalRootDirectory
             .then(function (success) {
@@ -61,9 +66,11 @@ angular.module('starter.controllers', [])
                         $scope.jugadores=dato;
                       }, function (error) {
                         // error
+                        console.log(error);
                       });
             }, function (error) {
               // error
+              console.log(error);
             });
       }
       catch(e)
@@ -89,15 +96,7 @@ angular.module('starter.controllers', [])
 	  			$scope.usuario.puntaje+=pregunta.puntos;
 	  			$scope.usuario.nivel="PADAWAN";
 	  			$scope.contestada1=true;
-	  			try
-	  			{
-					$cordovaVibration.vibrate(200);
-    				$cordovaNativeAudio.play('si');
-    			}
-    			catch(e)
-    			{
-    				console.log("La vibracion y el sonido, solo funcionan en celulares");
-    			}
+          ReproducirPositivo();
 	  		}
 	  		else
 	  		{
@@ -108,15 +107,7 @@ angular.module('starter.controllers', [])
    				});
 	  			$scope.clase1.btnIncorrecto=true;
 	  			$scope.contestada1=true;
-	  			try
-	  			{
-					$cordovaVibration.vibrate([200,200,200]);
-	    			$cordovaNativeAudio.play('no');
-    			}
-    			catch(e)
-    			{
-    				console.log("La vibracion y el sonido, solo funcionan en celulares");
-    			}
+          ReproducirNegativo();
 	  		}
   		}
   		if(pregunta.id==2)
@@ -139,15 +130,8 @@ angular.module('starter.controllers', [])
 	  				$scope.usuario.nivel="PADAWAN";
 	  			if($scope.usuario.puntaje>500)
 	  				$scope.usuario.nivel="CABALLERO JEDI";
-	  			try
-	  			{
-					$cordovaVibration.vibrate(200);
-    				$cordovaNativeAudio.play('si');
-    			}
-    			catch(e)
-    			{
-    				console.log("La vibracion y el sonido, solo funcionan en celulares");
-    			}
+
+          ReproducirPositivo();
 	  		}
 	  		else
 	  		{
@@ -158,18 +142,10 @@ angular.module('starter.controllers', [])
    				});
 	  			$scope.clase2.btnIncorrecto=true;
 	  			$scope.contestada2=true;
-	  			try
-	  			{
-					$cordovaVibration.vibrate([200,200,200]);
-	    			$cordovaNativeAudio.play('no');
-    			}
-    			catch(e)
-    			{
-    				console.log("La vibracion y el sonido, solo funcionan en celulares");
-    			}
+          ReproducirNegativo();
 	  		}
   		}
-  	  	if(pregunta.id==3)
+  	  if(pregunta.id==3)
   		{
   		  	$scope.usuario.pregunta3=pregunta.pregunta;
 	  		$scope.usuario.respuesta3=pregunta.respuesta;
@@ -192,15 +168,7 @@ angular.module('starter.controllers', [])
 	  			if($scope.usuario.puntaje>=800)
 	  				$scope.usuario.nivel="MAESTRO JEDI";
 
-	  			try
-	  			{
-					$cordovaVibration.vibrate(200);
-    				$cordovaNativeAudio.play('si');
-    			}
-    			catch(e)
-    			{
-    				console.log("La vibracion y el sonido, solo funcionan en celulares");
-    			}
+          ReproducirPositivo();
 	  		}
 	  		else
 	  		{
@@ -211,20 +179,35 @@ angular.module('starter.controllers', [])
    				});
 	  			$scope.clase3.btnIncorrecto=true;
 	  			$scope.contestada3=true;
-	  			try
-	  			{
-					$cordovaVibration.vibrate([200,200,200]);
-	    			$cordovaNativeAudio.play('no');
-    			}
-    			catch(e)
-    			{
-    				console.log("La vibracion y el sonido, solo funcionan en celulares");
-    			}
-			}
+          ReproducirNegativo();
+			   }
   		}
   	}
 
-  	var usuarios=new Firebase('https://trivia-ce4e1.firebaseio.com/USUARIOS');
+    function ReproducirPositivo(){
+      try
+      {
+        $cordovaVibration.vibrate(200);
+        $cordovaNativeAudio.play('si');
+      }
+      catch(e)
+      {
+        console.log("La vibracion y el sonido, solo funcionan en celulares");
+      }
+    }
+
+    function ReproducirNegativo(){
+      try
+      {
+        $cordovaVibration.vibrate([200,200,200]);
+        $cordovaNativeAudio.play('no');
+      }
+      catch(e)
+      {
+        console.log("La vibracion y el sonido, solo funcionan en celulares");
+      }
+    }
+
 
     $scope.Salir=function(){
   		usuarios.push({nombre: $scope.usuario.nombre, 
@@ -252,6 +235,7 @@ angular.module('starter.controllers', [])
                   console.log("archivo guardado");
                 }, function (error) {
                   // error
+                  console.log(error);
                 });
       }
       catch(e)
@@ -264,7 +248,6 @@ angular.module('starter.controllers', [])
      					cssClass:'salida',
      					okType: 'button-energized',
    				});
-
   		$state.go("tab.login");
    	}
 })
@@ -279,6 +262,7 @@ angular.module('starter.controllers', [])
                 $scope.archivo=dato;
               }, function (error) {
                 // error
+                console.log(error);
               });
     }, false);
 })

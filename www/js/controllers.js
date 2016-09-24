@@ -6,12 +6,18 @@ angular.module('starter.controllers', [])
 	$scope.Guardar=function(){
 		var dato=JSON.stringify($scope.usuarioLog);
 		$state.go("tab.trivia",{nombre:dato});
-    $scope.usuarioLog.nombreLog="";
 	}
 })
 
 
 .controller('TriviaCtrl', function($scope, $timeout, $stateParams, $state, $cordovaVibration, $cordovaNativeAudio, $ionicPopup, $http, $cordovaFile) {
+
+    $scope.usuario={};
+	 var nombre=JSON.parse($stateParams.nombre);
+  	$scope.usuario.puntaje=0;
+  	$scope.usuario.nombre=nombre.nombreLog;
+  	$scope.usuario.nivel="INICIADOR";
+
   document.addEventListener("deviceready", 
     function onDeviceReady() {
         $cordovaFile.createFile(cordova.file.externalRootDirectory, "trivia.txt",true) // cordova.file.dataDirectory //cordova.file.externalRootDirectory
@@ -23,12 +29,6 @@ angular.module('starter.controllers', [])
             console.log(error);
           });
     }, false);
-
-    $scope.usuario={};
-	 var nombre=JSON.parse($stateParams.nombre);
-  	$scope.usuario.puntaje=0;
-  	$scope.usuario.nombre=nombre.nombreLog;
-  	$scope.usuario.nivel="INICIADOR";
 
   	$scope.clase1={};
   	$scope.clase2={};
@@ -54,6 +54,7 @@ angular.module('starter.controllers', [])
        //console.log($scope.preguntas);
      });
     });
+
 
     try{
       $cordovaFile.checkFile(cordova.file.externalRootDirectory, "trivia.txt") // cordova.file.dataDirectory //cordova.file.externalRootDirectory
@@ -247,7 +248,6 @@ angular.module('starter.controllers', [])
      					cssClass:'salida',
      					okType: 'button-energized',
    				});
-
   		$state.go("tab.login");
    	}
 })
