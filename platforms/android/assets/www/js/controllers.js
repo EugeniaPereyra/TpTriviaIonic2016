@@ -35,7 +35,6 @@ angular.module('starter.controllers', [])
   	$scope.clase3={};
 	 $scope.preguntas=[];
    $scope.jugadores=[];
-   var usuarios=new Firebase('https://trivia-ce4e1.firebaseio.com/USUARIOS');
   	
     // CARGA PREGUNTAS DESDE UN ARCHIVO JSON (PARA PODER JUGAR SIN CONEXION)
   	// $http.get('preguntas/preguntas.json')
@@ -46,6 +45,7 @@ angular.module('starter.controllers', [])
    //   		console.log(error);
  	 // });
 
+   try{
     var preguntas=new Firebase('https://trivia-ce4e1.firebaseio.com/PREGUNTAS');
     preguntas.on('child_added', function (snapshot){
      $timeout(function(){
@@ -54,7 +54,27 @@ angular.module('starter.controllers', [])
        //console.log($scope.preguntas);
      });
     });
+  }
+  catch(e)
+  {
+      $ionicPopup.alert({
+              title: 'No se pudo obtener las preguntas. Revise su conexion.',
+              cssClass:'salida',
+              okType: 'button-energized',
+          });
+  }
 
+    try{
+      var usuarios=new Firebase('https://trivia-ce4e1.firebaseio.com/USUARIOS');
+    }
+    catch(e)
+    {
+      $ionicPopup.alert({
+              title: 'No se pudo conectar a la base de datos de usuarios. Revise su conexion.',
+              cssClass:'salida',
+              okType: 'button-energized',
+          });
+    }
 
     try{
       $cordovaFile.checkFile(cordova.file.externalRootDirectory, "trivia.txt") // cordova.file.dataDirectory //cordova.file.externalRootDirectory
